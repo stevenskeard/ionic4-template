@@ -36,6 +36,7 @@ wget -q http://dl-ssl.google.com/android/repository/tools_r${SDK_TOOLS_VERSION}-
 unzip -qq -o android-sdk-tools.zip -d ${ANDROID_HOME}
 rm -f android-sdk-tools.zip
 echo y | android update sdk --no-ui -a --filter tools,platform-tools,${ANDROID_EXTRAS},${API_LEVELS},${BUILD_TOOLS_VERSIONS} --no-https
+chmod -R o+rw ${ANDROID_HOME}
 
 # Install required NPM packages
 sudo npm install -g ionic cordova
