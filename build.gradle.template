@@ -30,6 +30,14 @@ task ionicBuild(type: Task){
     }
 }
 
+task ionicClean(type: Task){
+    doLast{
+        exec{
+            commandLine '/bin/bash', '-c', 'rm -rf ./platforms ./plugins ./www'
+        }
+    }
+}
+
 task deployAndroid(type: Task){
     doLast{
         exec{
@@ -39,5 +47,7 @@ task deployAndroid(type: Task){
 }
 
 build.dependsOn ionicBuild
-ionicbuild.dependsOn npmInstall
+ionicBuild.dependsOn npmInstall
 clean.dependsOn npmClean
+clean.dependsOn ionicClean
+
