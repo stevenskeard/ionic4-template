@@ -1,0 +1,43 @@
+buildscript{
+    repositories{
+        google()
+        jcenter()
+    }
+}
+
+apply plugin: 'base'
+task npmInstall(type: Task){
+    doLast{
+        exec{
+            commandLine '/bin/bash', '-c', 'npm install'
+        }
+    }
+}
+
+task npmClean(type: Task){
+    doLast{
+        exec{
+            commandLine '/bin/bash', '-c', 'rm -rf ./node_modules'
+        }
+    }
+}
+
+task ionicBuild(type: Task){
+    doLast{
+        exec{
+            commandLine '/bin/bash', '-c', 'ionic cordova build android --no-interactive'
+        }
+    }
+}
+
+task deployAndroid(type: Task){
+    doLast{
+        exec{
+            commandLine '/bin/bash', '-c', 'adb install platforms/android/build/outputs/*.apk'
+        }
+    }
+}
+
+build.dependsOn ionicBuild
+ionicbuild.dependsOn npmInstall
+clean.dependsOn npmClean
