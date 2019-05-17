@@ -6,11 +6,12 @@ set -e
 # Setup vars
 export VAGRANT_HOME="/home/vagrant"
 export ANDROID_HOME="/opt/android-sdk-linux"
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"
 export SDK_TOOLS_VERSION="25.2.5"
 export API_LEVELS="android-23,android-24,android-25,android-26,android-27,android-28"
 export BUILD_TOOLS_VERSIONS="build-tools-28.0.3"
 export ANDROID_EXTRAS="extra-android-m2repository,extra-android-support,extra-google-google_play_services,extra-google-m2repository"
-export PATH="${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${PATH}"
+export PATH="${JAVA_HOME}/bin:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${PATH}"
 
 # Add vars for bash
 export BASH_CONFIG="${VAGRANT_HOME}/.bashrc"
@@ -25,7 +26,8 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y \
     'build-essential' \
     'nodejs' \
-    'gradle'
+    'gradle' \
+    'openjdk-8-jdk'
 
 # Install android
 mkdir -p ${ANDROID_HOME}
@@ -40,6 +42,9 @@ sudo npm install -g ionic cordova
 
 # Add permissions for global packages
 sudo chmod -R o+rw /usr/lib/node_modules
+
+# Config alternatives for java
+echo 2 | sudo update-alternatives --config java
 
 # Exit
 exit 0
