@@ -4,12 +4,6 @@
 #Setup fail early
 set -e
 
-# Install required global packages
-sudo npm install -g ionic cordova
-
-# Add permissions for global packages
-sudo chmod -R o+rw /usr/lib/node_modules
-
 # Prompt for project name
 read -p "Enter project name:" projectName
 

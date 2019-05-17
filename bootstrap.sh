@@ -35,5 +35,11 @@ mkdir -p /opt/android-sdk-linux && cd /opt \
     && echo y | android update sdk --no-ui -a --filter \
        tools,platform-tools,${ANDROID_EXTRAS},${API_LEVELS},${BUILD_TOOLS_VERSIONS} --no-https
 
+# Install required NPM packages
+sudo npm install -g ionic cordova
+
+# Add permissions for global packages
+sudo chmod -R o+rw /usr/lib/node_modules
+
 # Exit
 exit 0
